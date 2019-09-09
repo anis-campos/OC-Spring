@@ -10,7 +10,7 @@ import org.glassfish.jersey.server.ResourceConfig;
  *
  * @author lgu
  */
-@ApplicationPath("/")
+@ApplicationPath("/rest")
 public class RestApplication extends ResourceConfig {
 
     /**
