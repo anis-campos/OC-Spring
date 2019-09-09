@@ -12,6 +12,10 @@
     </Appenders>
 
     <Loggers>
+        <Logger name="org.springframework" level="debug" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
         <Logger name="org.example.demo.ticket" level="debug" additivity="false">
             <AppenderRef ref="STDOUT"/>
         </Logger>
