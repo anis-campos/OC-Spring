@@ -3,8 +3,13 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="
             http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd
-http://www.springframework.org/schema/beans ">
+            http://www.springframework.org/schema/beans/spring-beans.xsd ">
 
+    <bean id="daoFactory" class="org.example.demo.ticket.consumer.impl.factory.DaoFactoryImpl">
+        <property name="projectDao" ref="projectDao"/>
+        <property name="ticketDao" ref="ticketDao"/>
+    </bean>
 
+    <bean id="projectDao" class="org.example.demo.ticket.consumer.impl.dao.ProjetDaoImpl"/>
+    <bean id="ticketDao" class="org.example.demo.ticket.consumer.impl.dao.TicketDaoImpl"/>
 </beans>

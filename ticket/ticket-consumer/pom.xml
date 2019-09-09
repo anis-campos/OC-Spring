@@ -27,14 +27,6 @@
     <!-- =============================================================== -->
     <dependencies>
         <!-- ===== Modules ===== -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>${project.parent.artifactId}-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>${project.parent.artifactId}-technical</artifactId>
-        </dependency>
 
         <!-- ===== Bibliothèques tierces ===== -->
         <dependency>
@@ -42,6 +34,11 @@
             <artifactId>postgresql</artifactId>
             <version>9.4.1212</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
         </dependency>
 
         <!-- ===== Tests ===== -->

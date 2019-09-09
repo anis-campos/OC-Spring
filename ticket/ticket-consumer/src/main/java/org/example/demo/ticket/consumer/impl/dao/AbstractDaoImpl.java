@@ -10,7 +10,7 @@ public abstract class AbstractDaoImpl {
     @Named("dataSourceTicket")
     private DataSource dataSource;
 
-    protected DataSource getDataSource() {
+    DataSource getDataSource() {
         return dataSource;
     }
 }

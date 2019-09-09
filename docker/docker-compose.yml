@@ -9,6 +9,8 @@ services:
       - POSTGRES_DB=db_ticket
       - POSTGRES_USER=ticket
       - POSTGRES_PASSWORD=ticket
+    ports:
+      - "8081:5432"
   web:
     build: ./
     links:

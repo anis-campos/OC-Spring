@@ -3,8 +3,20 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="
             http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd
-http://www.springframework.org/schema/beans ">
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="dataSourceTicket" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/DB_TICKET"/>
+    </bean>
+
+    <bean id="abstractResource" class="org.example.demo.ticket.webapp.rest.resource.AbstractResource" abstract="true">
+        <property name="managerFactory" ref="managerFactory"/>
+    </bean>
+
+    <bean class="org.example.demo.ticket.webapp.rest.resource.projet.ProjetResource" id="projetResource" parent="abstractResource">
+    </bean>
+
+    <bean class="org.example.demo.ticket.webapp.rest.resource.ticket.TicketResource" id="ticketResource" parent="abstractResource">
+    </bean>
 
 </beans>
