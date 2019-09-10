@@ -174,12 +174,7 @@
                 <version>${log4j.version}</version>
                 <scope>runtime</scope>
             </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>jul-to-slf4j</artifactId>
-                <version>1.7.28</version>
-                <scope>runtime</scope>
-            </dependency>
+
 
             <dependency>
                 <groupId>org.springframework</groupId>
