@@ -4,12 +4,16 @@ package org.example.demo.ticket.business.manager;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.example.demo.ticket.consumer.factory.DaoFactory;
 import org.example.demo.ticket.model.bean.projet.Projet;
 import org.example.demo.ticket.model.bean.ticket.Bug;
 import org.example.demo.ticket.model.bean.ticket.Evolution;
 import org.example.demo.ticket.model.bean.ticket.Ticket;
 import org.example.demo.ticket.model.exception.NotFoundException;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Named;
 
 
 /**
@@ -18,6 +22,9 @@ import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
  * @author lgu
  */
 public class TicketManager {
+
+    private DaoFactory daoFactory;
+
 
     /**
      * Cherche et renvoie le {@link Ticket} numéro {@code pNumero}
@@ -45,23 +52,9 @@ public class TicketManager {
      * @return List
      */
     public List<Ticket> getListTicket(RechercheTicket pRechercheTicket) {
-        // Je n'ai pas encore codé la DAO
-        // Je mets juste un code temporaire pour commencer le cours...
-        List<Ticket> vList = new ArrayList<>();
-        if (pRechercheTicket.getProjetId() != null) {
-            Projet vProjet = new Projet(pRechercheTicket.getProjetId());
-            for (int vI = 0; vI < 4; vI++) {
-                Ticket vTicket = new Bug((long) pRechercheTicket.getProjetId() * 10 + vI);
-                vTicket.setProjet(vProjet);
-                vList.add(vTicket);
-            }
-        } else {
-            for (int vI = 0; vI < 9; vI++) {
-                Ticket vTicket = new Evolution((long) vI);
-                vList.add(vTicket);
-            }
-        }
-        return vList;
+
+        return daoFactory.ticketDao().search(pRechercheTicket);
+
     }
 
 
@@ -75,5 +68,9 @@ public class TicketManager {
         // Je n'ai pas encore codé la DAO
         // Je mets juste un code temporaire pour commencer le cours...
         return 42;
+    }
+
+    public void setDaoFactory(DaoFactory daoFactory) {
+        this.daoFactory = daoFactory;
     }
 }
