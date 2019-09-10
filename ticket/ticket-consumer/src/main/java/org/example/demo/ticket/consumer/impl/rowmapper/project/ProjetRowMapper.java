@@ -3,12 +3,12 @@ package org.example.demo.ticket.consumer.impl.rowmapper.project;
 import org.example.demo.ticket.model.bean.projet.Projet;
 import org.example.demo.ticket.model.bean.utilisateur.Utilisateur;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
-import javax.inject.Named;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Named
+@Component
 public class ProjetRowMapper implements RowMapper<Projet> {
 
     @Override
