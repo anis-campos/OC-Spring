@@ -1,13 +1,12 @@
 package org.example.demo.ticket.consumer.impl.factory;
 
+import org.example.demo.ticket.consumer.dao.ProjetDao;
 import org.example.demo.ticket.consumer.dao.TicketDao;
 import org.example.demo.ticket.consumer.factory.DaoFactory;
-import org.example.demo.ticket.consumer.dao.ProjetDao;
-import org.example.demo.ticket.consumer.impl.dao.ProjetDaoImpl;
 
 class DaoFactoryImpl implements DaoFactory {
 
-    private ProjetDaoImpl projectDao;
+    private ProjetDao projectDao;
     private TicketDao ticketDao;
 
     @Override
@@ -20,11 +19,11 @@ class DaoFactoryImpl implements DaoFactory {
         return ticketDao;
     }
 
-    public void setProjectDao(ProjetDaoImpl projectDao) {
+    public void setProjectDao(ProjetDao projectDao) {
         this.projectDao = projectDao;
     }
 
-    public ProjetDaoImpl getProjectDao() {
+    public ProjetDao getProjectDao() {
         return projectDao;
     }
 
