@@ -6,6 +6,10 @@ public class Utilisateur {
     private String nom;
     private String prenom;
 
+    public Utilisateur(){
+
+    }
+
     public Utilisateur(int responsable_id) {
         this.id = responsable_id;
     }
