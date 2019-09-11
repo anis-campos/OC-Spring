@@ -1,7 +1,10 @@
 /target
-/*-*/target
+/ticket/ticket-webapp/target
 
-/.idea
+*~
+.DS_Store
+.idea
+
 /.settings
 /.project
 *.iml
