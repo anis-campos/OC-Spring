@@ -48,10 +48,29 @@ class TicketDaoImpl extends AbstractDaoImpl implements TicketDao {
         }
         criteria += " 1=1";
 
-        return template.query("SELECT * FROM ticket t  " +
-                "LEFT JOIN bug b on t.numero = b.ticket_numero " +
-                "LEFT JOIN evolution e on t.numero = e.ticket_numero" +
-                criteria, parameters, rowMapper);
+        return template.query(
+                "SELECT " +
+                        "t.numero, " +
+                        "t.titre, " +
+                        "t.date, " +
+                        "t.description, " +
+//                        "t.statut_actuel_id, " +
+//                        "t.auteur_id, " +
+//                        "t.projet_id, " +
+                        "s.id as statut_id, " +
+                        "s.libelle as statut_libelle, " +
+                        "b.ticket_numero as bug_id, " +
+                        "b.niveau_bug_id as bug_niveau_id, " +
+                        "bn.ordre as bug_niveau_ordre, " +
+                        "bn.libelle as bug_niveau_libelle, " +
+                        "e.ticket_numero as evolution_id, " +
+                        "e.priorite as evolution_priorite " +
+                        "FROM ticket t " +
+                        "LEFT JOIN statut s on t.statut_actuel_id = s.id " +
+                        "LEFT JOIN bug b on t.numero = b.ticket_numero " +
+                        "LEFT JOIN niveau_bug bn on t.numero = bn.id " +
+                        "LEFT JOIN evolution e on t.numero = e.ticket_numero " +
+                        criteria, parameters, rowMapper);
 
 
     }
