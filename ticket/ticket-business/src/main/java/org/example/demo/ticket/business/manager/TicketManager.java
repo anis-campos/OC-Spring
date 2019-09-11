@@ -1,19 +1,11 @@
 package org.example.demo.ticket.business.manager;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.example.demo.ticket.consumer.factory.DaoFactory;
-import org.example.demo.ticket.model.bean.projet.Projet;
-import org.example.demo.ticket.model.bean.ticket.Bug;
-import org.example.demo.ticket.model.bean.ticket.Evolution;
 import org.example.demo.ticket.model.bean.ticket.Ticket;
 import org.example.demo.ticket.model.exception.NotFoundException;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Named;
+import java.util.List;
 
 
 /**
@@ -21,9 +13,7 @@ import javax.inject.Named;
  *
  * @author lgu
  */
-public class TicketManager {
-
-    private DaoFactory daoFactory;
+public interface TicketManager {
 
 
     /**
@@ -33,16 +23,7 @@ public class TicketManager {
      * @return Le {@link Ticket}
      * @throws NotFoundException Si le Ticket n'est pas trouvé
      */
-    public Ticket getTicket(Long pNumero) throws NotFoundException {
-        // Je n'ai pas encore codé la DAO
-        // Je mets juste un code temporaire pour commencer le cours...
-        if (pNumero < 1L) {
-            throw new NotFoundException("Ticket non trouvé : numero=" + pNumero);
-        }
-        Evolution vEvolution = new Evolution(pNumero);
-        vEvolution.setPriorite(10);
-        return vEvolution;
-    }
+    Ticket getTicket(Long pNumero) throws NotFoundException;
 
 
     /**
@@ -51,11 +32,7 @@ public class TicketManager {
      * @param pRechercheTicket -
      * @return List
      */
-    public List<Ticket> getListTicket(RechercheTicket pRechercheTicket) {
-
-        return daoFactory.ticketDao().search(pRechercheTicket);
-
-    }
+    List<Ticket> getListTicket(RechercheTicket pRechercheTicket);
 
 
     /**
@@ -64,13 +41,6 @@ public class TicketManager {
      * @param pRechercheTicket -
      * @return int
      */
-    public int getCountTicket(RechercheTicket pRechercheTicket) {
-        // Je n'ai pas encore codé la DAO
-        // Je mets juste un code temporaire pour commencer le cours...
-        return 42;
-    }
+    int getCountTicket(RechercheTicket pRechercheTicket);
 
-    public void setDaoFactory(DaoFactory daoFactory) {
-        this.daoFactory = daoFactory;
-    }
 }

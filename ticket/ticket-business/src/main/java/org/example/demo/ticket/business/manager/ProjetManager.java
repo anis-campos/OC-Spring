@@ -1,7 +1,6 @@
 package org.example.demo.ticket.business.manager;
 
 
-import org.example.demo.ticket.consumer.factory.DaoFactory;
 import org.example.demo.ticket.model.bean.projet.Projet;
 import org.example.demo.ticket.model.exception.NotFoundException;
 
@@ -13,9 +12,7 @@ import java.util.List;
  *
  * @author lgu
  */
-public class ProjetManager {
-
-    private DaoFactory daoFactory;
+public interface ProjetManager {
 
 
     /**
@@ -25,13 +22,7 @@ public class ProjetManager {
      * @return Le {@link Projet}
      * @throws NotFoundException Si le projet n'est pas trouvé
      */
-    public Projet getProjet(Integer pId) throws NotFoundException {
-        Projet p = daoFactory.projectDao().getById(pId);
-        if (p == null) {
-            throw new NotFoundException("Projet non trouvé : ID=" + pId);
-        }
-        return p;
-    }
+    Projet getProjet(Integer pId) throws NotFoundException;
 
 
     /**
@@ -39,11 +30,6 @@ public class ProjetManager {
      *
      * @return List
      */
-    public List<Projet> getListProjet() {
-        return daoFactory.projectDao().getAll();
-    }
+    List<Projet> getListProjet();
 
-    public void setDaoFactory(DaoFactory daoFactory) {
-        this.daoFactory = daoFactory;
-    }
 }

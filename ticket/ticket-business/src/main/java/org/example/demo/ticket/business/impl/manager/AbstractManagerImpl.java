@@ -1,15 +1,17 @@
 package org.example.demo.ticket.business.impl.manager;
 
+import org.example.demo.ticket.consumer.dao.ProjetDao;
+import org.example.demo.ticket.consumer.dao.TicketDao;
 import org.example.demo.ticket.consumer.factory.DaoFactory;
 
-public class AbstractManagerImpl {
-    private DaoFactory daoFactory;
+abstract class AbstractManagerImpl {
 
-    public void setDaoFactory(DaoFactory daoFactory) {
-        this.daoFactory = daoFactory;
-    }
 
-    public DaoFactory getDaoFactory() {
-        return daoFactory;
+    final TicketDao ticketDao;
+    final ProjetDao projectDao;
+
+    AbstractManagerImpl(DaoFactory daoFactory) {
+        this.ticketDao = daoFactory.ticketDao();
+        this.projectDao = daoFactory.projectDao();
     }
 }
