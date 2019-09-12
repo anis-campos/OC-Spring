@@ -1,6 +1,3 @@
-/target
-/ticket/ticket-webapp/target
-
 *~
 .DS_Store
 .idea
@@ -14,4 +11,4 @@
 /*-*/.checkstyle
 /*-*/.springBeans
 
-target
+target/

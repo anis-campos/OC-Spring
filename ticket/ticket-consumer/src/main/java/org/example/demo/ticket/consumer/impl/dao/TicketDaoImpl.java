@@ -39,8 +39,8 @@ class TicketDaoImpl extends AbstractDaoImpl implements TicketDao {
         String criteria = " where";
 
         if (pRechercheTicket.getProjetId() != null) {
-            parameters.addValue("project_id", pRechercheTicket.getProjetId());
-            criteria += " project_id=:project_id AND";
+            parameters.addValue("projet_id", pRechercheTicket.getProjetId());
+            criteria += " projet_id=:projet_id AND";
         }
         if (pRechercheTicket.getAuteurId() != null) {
             parameters.addValue("auteur_id", pRechercheTicket.getAuteurId());

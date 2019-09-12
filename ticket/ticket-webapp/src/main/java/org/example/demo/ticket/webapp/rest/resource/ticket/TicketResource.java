@@ -4,6 +4,7 @@ import org.example.demo.ticket.model.bean.ticket.Ticket;
 import org.example.demo.ticket.model.exception.NotFoundException;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
 import org.example.demo.ticket.webapp.rest.resource.AbstractResource;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 @Path("/tickets")
 @Produces(MediaType.APPLICATION_JSON)
+@Component
 public class TicketResource extends AbstractResource {
 
 
