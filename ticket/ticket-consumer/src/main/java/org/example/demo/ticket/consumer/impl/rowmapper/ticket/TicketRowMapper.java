@@ -1,6 +1,7 @@
 package org.example.demo.ticket.consumer.impl.rowmapper.ticket;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.example.demo.ticket.model.bean.projet.Projet;
 import org.example.demo.ticket.model.bean.ticket.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,6 +19,9 @@ public class TicketRowMapper implements RowMapper<Ticket> {
     @Autowired
     private RowMapper<BugNiveau> bugNiveauRowMapper;
 
+    @Autowired
+    private RowMapper<Projet> projetRowMapper;
+
     @Override
     public Ticket mapRow(ResultSet rs, int i) throws SQLException {
         Ticket t;
@@ -25,7 +29,6 @@ public class TicketRowMapper implements RowMapper<Ticket> {
         if (rs.getInt("bug_id") != 0) {
             Bug b = new Bug();
             b.setNiveau(bugNiveauRowMapper.mapRow(rs, i));
-            b.setStatut(ticketStatutRowMapper.mapRow(rs, i));
 
             t = b;
         } else if (rs.getInt("evolution_id") != 0) {
@@ -40,6 +43,8 @@ public class TicketRowMapper implements RowMapper<Ticket> {
         t.setTitre(rs.getString("titre"));
         t.setDate(rs.getDate("date"));
         t.setDescription(rs.getString("description"));
+        t.setProjet(projetRowMapper.mapRow(rs, i));
+        t.setStatut(ticketStatutRowMapper.mapRow(rs, i));
 
         return t;
 

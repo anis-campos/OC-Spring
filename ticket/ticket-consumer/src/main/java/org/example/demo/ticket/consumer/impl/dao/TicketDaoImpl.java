@@ -54,9 +54,14 @@ class TicketDaoImpl extends AbstractDaoImpl implements TicketDao {
                         "t.titre, " +
                         "t.date, " +
                         "t.description, " +
-//                        "t.statut_actuel_id, " +
-//                        "t.auteur_id, " +
-//                        "t.projet_id, " +
+                        "u.id as u_id, " +
+                        "u.nom as u_nom, " +
+                        "u.prenom as u_prenom, " +
+                        "p.id as projet_id, " +
+                        "p.nom as projet_nom, " +
+                        "p.date_creation as projet_date_creation, " +
+                        "p.cloture as projet_cloture, " +
+                        "p.responsable_id as projet_responsable_id, " +
                         "s.id as statut_id, " +
                         "s.libelle as statut_libelle, " +
                         "b.ticket_numero as bug_id, " +
@@ -66,7 +71,9 @@ class TicketDaoImpl extends AbstractDaoImpl implements TicketDao {
                         "e.ticket_numero as evolution_id, " +
                         "e.priorite as evolution_priorite " +
                         "FROM ticket t " +
-                        "LEFT JOIN statut s on t.statut_actuel_id = s.id " +
+                        "JOIN statut s on t.statut_actuel_id = s.id " +
+                        "JOIN projet p on t.projet_id = p.id " +
+                        "JOIN utilisateur u on p.responsable_id = u.id " +
                         "LEFT JOIN bug b on t.numero = b.ticket_numero " +
                         "LEFT JOIN niveau_bug bn on t.numero = bn.id " +
                         "LEFT JOIN evolution e on t.numero = e.ticket_numero " +
