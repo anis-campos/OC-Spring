@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface TicketDao {
 
-    Ticket getById(Integer pId);
+    Ticket getById(Long pId);
 
     List<Ticket> search(RechercheTicket pRechercheTicket);
+
+    int count(RechercheTicket pRechercheTicket);
 }

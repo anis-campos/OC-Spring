@@ -16,7 +16,7 @@ class TicketDaoImpl extends AbstractDaoImpl implements TicketDao {
     private RowMapper<Ticket> rowMapper;
 
     @Override
-    public Ticket getById(Integer pId) {
+    public Ticket getById(Long pId) {
 
 
         NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(getDataSource());
@@ -32,21 +32,11 @@ class TicketDaoImpl extends AbstractDaoImpl implements TicketDao {
     @Override
     public List<Ticket> search(RechercheTicket pRechercheTicket) {
 
-        NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(getDataSource());
+        Search search = new Search(pRechercheTicket).invoke();
 
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-
-        String criteria = " where";
-
-        if (pRechercheTicket.getProjetId() != null) {
-            parameters.addValue("projet_id", pRechercheTicket.getProjetId());
-            criteria += " projet_id=:projet_id AND";
-        }
-        if (pRechercheTicket.getAuteurId() != null) {
-            parameters.addValue("auteur_id", pRechercheTicket.getAuteurId());
-            criteria += " auteur_id=:auteur_id AND";
-        }
-        criteria += " 1=1";
+        NamedParameterJdbcTemplate template = search.getTemplate();
+        MapSqlParameterSource parameters = search.getParameters();
+        String criteria = search.getCriteria();
 
         return template.query(
                 "SELECT " +
@@ -80,6 +70,64 @@ class TicketDaoImpl extends AbstractDaoImpl implements TicketDao {
                         criteria, parameters, rowMapper);
 
 
+    }
+
+
+    @Override
+    public int count(RechercheTicket pRechercheTicket) {
+
+
+        Search search = new Search(pRechercheTicket).invoke();
+
+        NamedParameterJdbcTemplate template = search.getTemplate();
+        MapSqlParameterSource parameters = search.getParameters();
+        String criteria = search.getCriteria();
+
+        return template.queryForObject("SELECT COUNT(*) " + "FROM ticket t " + criteria, parameters, Integer.class);
+
+
+    }
+
+    private class Search {
+        private RechercheTicket pRechercheTicket;
+        private NamedParameterJdbcTemplate template;
+        private MapSqlParameterSource parameters;
+        private String criteria;
+
+        Search(RechercheTicket pRechercheTicket) {
+            this.pRechercheTicket = pRechercheTicket;
+        }
+
+        NamedParameterJdbcTemplate getTemplate() {
+            return template;
+        }
+
+        MapSqlParameterSource getParameters() {
+            return parameters;
+        }
+
+        String getCriteria() {
+            return criteria;
+        }
+
+        Search invoke() {
+            template = new NamedParameterJdbcTemplate(getDataSource());
+
+            parameters = new MapSqlParameterSource();
+
+            criteria = " where";
+
+            if (pRechercheTicket.getProjetId() != null) {
+                parameters.addValue("projet_id", pRechercheTicket.getProjetId());
+                criteria += " projet_id=:projet_id AND";
+            }
+            if (pRechercheTicket.getAuteurId() != null) {
+                parameters.addValue("auteur_id", pRechercheTicket.getAuteurId());
+                criteria += " auteur_id=:auteur_id AND";
+            }
+            criteria += " 1=1";
+            return this;
+        }
     }
 }
 

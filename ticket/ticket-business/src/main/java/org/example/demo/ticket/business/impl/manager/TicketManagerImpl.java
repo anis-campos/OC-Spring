@@ -2,7 +2,6 @@ package org.example.demo.ticket.business.impl.manager;
 
 import org.example.demo.ticket.business.manager.TicketManager;
 import org.example.demo.ticket.consumer.factory.DaoFactory;
-import org.example.demo.ticket.model.bean.ticket.Evolution;
 import org.example.demo.ticket.model.bean.ticket.Ticket;
 import org.example.demo.ticket.model.exception.NotFoundException;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
@@ -22,14 +21,7 @@ class TicketManagerImpl extends AbstractManagerImpl implements TicketManager {
      * @throws NotFoundException Si le Ticket n'est pas trouvé
      */
     public Ticket getTicket(Long pNumero) throws NotFoundException {
-        // Je n'ai pas encore codé la DAO
-        // Je mets juste un code temporaire pour commencer le cours...
-        if (pNumero < 1L) {
-            throw new NotFoundException("Ticket non trouvé : numero=" + pNumero);
-        }
-        Evolution vEvolution = new Evolution(pNumero);
-        vEvolution.setPriorite(10);
-        return vEvolution;
+        return ticketDao.getById(pNumero);
     }
 
 
@@ -53,8 +45,6 @@ class TicketManagerImpl extends AbstractManagerImpl implements TicketManager {
      * @return int
      */
     public int getCountTicket(RechercheTicket pRechercheTicket) {
-        // Je n'ai pas encore codé la DAO
-        // Je mets juste un code temporaire pour commencer le cours...
-        return 42;
+        return ticketDao.count(pRechercheTicket);
     }
 }
